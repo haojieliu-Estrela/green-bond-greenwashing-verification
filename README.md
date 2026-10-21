@@ -84,24 +84,51 @@ cd backend
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
-### 2. 启动后端
+### 1. 配置 API KEY 和模型
 
-```bash
-cd backend
-mvn spring-boot:run
+打开 `backend/src/main/resources/application.yml`，修改以下字段：
+
+```yaml
+spring:
+  ai:
+    openai:
+      api-key: sk-your-api-key-here
+      base-url: https://api.moonshot.cn
+      chat:
+        options:
+          model: kimi-k3
 ```
 
-后端默认运行在 http://localhost:8080
-
-### 3. 启动前端
+### 2. 一行代码启动前后端
 
 ```bash
+make dev
+```
+
+或直接运行：
+
+```bash
+./start-dev.sh
+```
+
+这会同时启动：
+- 后端 http://localhost:8080
+- 前端 http://localhost:5173
+
+按 `Ctrl+C` 即可同时停止两个服务。
+
+### 3. 分开启动（可选）
+
+```bash
+# 后端
+cd backend
+mvn spring-boot:run
+
+# 前端
 cd frontend
 npm install
 npm run dev
 ```
-
-前端默认运行在 http://localhost:5173，已配置代理到后端。
 
 ---
 
