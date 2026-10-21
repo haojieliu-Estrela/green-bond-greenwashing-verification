@@ -1,0 +1,42 @@
+# 绿色债券 RAG 智能洗绿核验平台
+# 本地运行配置：填写你自己的 API KEY 和模型名称
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: green-bond-rag
+
+  # Spring AI OpenAI 兼容配置
+  # 默认接入 Kimi/Moonshot 国内版，也可以改成 DeepSeek、OpenAI 等其他 OpenAI 兼容平台
+  ai:
+    openai:
+      # 填写你的 API KEY（不要提交到 Git）
+      api-key: ${OPENAI_API_KEY:sk-your-api-key-here}
+
+      # 填写平台的 base URL（不要带 /v1 后缀，Spring AI 会自动补充）
+      base-url: ${OPENAI_BASE_URL:https://api.moonshot.cn}
+
+      chat:
+        options:
+          # 填写模型名称，如 kimi-k3、kimi-k2.7-code-highspeed、deepseek-chat 等
+          model: ${OPENAI_MODEL:kimi-k3}
+          # kimi-k3 等模型只允许 temperature=1，不要改
+          temperature: 1.0
+          # 默认 max_tokens，可根据模型调整
+          max-tokens: 2048
+
+# 自定义配置
+app:
+  # 默认系统角色提示（绿色债券洗绿核验专家）
+  system-prompt: |
+    你是一位绿色债券洗绿核验专家。
+    你的任务是根据用户提供的绿色债券相关文档，
+    识别其中可能存在的洗绿风险，并给出结论与依据。
+    回答要简洁、专业、可解释。
+
+# 日志
+logging:
+  level:
+    com.gbrag: debug

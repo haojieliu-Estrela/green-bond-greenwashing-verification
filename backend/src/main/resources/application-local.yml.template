@@ -1,0 +1,24 @@
+# 复制本文件为 application-local.yml，填写你自己的配置
+# 运行时加上 --spring.profiles.active=local 即可使用
+
+spring:
+  ai:
+    openai:
+      # 填写你的 API KEY
+      api-key: sk-your-api-key-here
+
+      # 平台地址（可选，不要带 /v1 后缀，Spring AI 会自动补充）
+      # Kimi/Moonshot 国内: https://api.moonshot.cn
+      # Kimi/Moonshot 国际: https://api.moonshot.ai
+      # DeepSeek: https://api.deepseek.com
+      # OpenAI: https://api.openai.com
+      base-url: https://api.moonshot.cn
+
+      chat:
+        options:
+          # 填写模型名称
+          # kimi-k3、kimi-k2.7-code-highspeed、kimi-k2.7-code、deepseek-chat 等
+          model: kimi-k3
+          # kimi-k3 等模型只允许 temperature=1
+          temperature: 1.0
+          max-tokens: 2048
